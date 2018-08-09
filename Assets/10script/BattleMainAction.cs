@@ -28,6 +28,8 @@ namespace BattleMainAction
 		{
 			base.OnEnter();
 
+			obj_skill_command.Value.gameObject.SetActive (true);
+
 			skillCommand = obj_skill_command.Value.GetComponent<SkillCommand>();
 
 			skillCommand.OnCancel.AddListener(HandleCancel);
@@ -43,6 +45,12 @@ namespace BattleMainAction
 		private void HandleCancel()
 		{
 			Fsm.Event("cancel");
+		}
+
+		public override void OnExit ()
+		{
+			base.OnExit ();
+			obj_skill_command.Value.gameObject.SetActive (false);
 		}
 	}
 }
